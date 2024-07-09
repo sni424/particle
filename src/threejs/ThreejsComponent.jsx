@@ -1,37 +1,36 @@
-import { Environment, OrbitControls } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-import React, { useEffect, useRef } from "react";
-import * as THREE from "three";
+import { Environment, MeshReflectorMaterial, OrbitControls } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { centerAndZoomToObject } from '../../utils/utilfun';
 
-const ThreejsComponent = () => {
-  const { scene, camera } = useThree();
-  const orbit = useRef();
-  const color = new THREE.Color(0x808080);
-  scene.background = color;
-  console.log(camera, orbit);
-  // const boxGeo = new THREE.BoxGeometry(5, 4);
-  // const boxMater = new THREE.MeshBasicMaterial({ color: 'red' });
-  // const newMesh = new THREE.Mesh(boxGeo, boxMater);
-  // newMesh.position.set(1, 1, 3.3);
-  // scene.add(newMesh);
-  useEffect(() => {
-    if (camera) {
-      camera.position.set(0.32, 1.2, 0.27);
-      orbit.current.position0.set(0, 3, 5);
-      orbit.current.target.set(
-        -0.08293900397585911,
-        0.5689524576974492,
-        -0.6090364824553958
-      );
-    }
-  }, [camera]);
+const ThreejsComponent = ({ modelData }) => {
+    const { scene, camera, gl } = useThree();
+    const orbit = useRef();
 
-  return (
-    <>
-      <Environment preset="city" />
-      <OrbitControls ref={orbit} />
-    </>
-  );
+    // const color = new THREE.Color(0xa6e1d3);
+    scene.background = null;
+    gl.autoClear = false;
+    gl.setClearColor(0xffffff, 0.0);
+    console.log(camera, orbit);
+    // const boxGeo = new THREE.BoxGeometry(2, 2);
+    // const boxMater = new THREE.MeshBasicMaterial({ color: 'red' });
+    // const newMesh = new THREE.Mesh(boxGeo, boxMater);
+    // newMesh.position.set(0, 0, -1);
+    // scene.add(newMesh);
+
+    useEffect(() => {
+        if (camera && modelData) {
+            centerAndZoomToObject(modelData, camera, orbit.current);
+        }
+    }, [camera, modelData]);
+
+    return (
+        <>
+            <Environment preset="city" />
+            <OrbitControls ref={orbit} />
+        </>
+    );
 };
 
 export default ThreejsComponent;
