@@ -27,15 +27,15 @@ const ThreejsComponent = ({ modelData }) => {
 
   useEffect(() => {
     if (camera && modelData) {
-      //   centerAndZoomToObject(modelData, camera, orbit.current);
+      centerAndZoomToObject(modelData, camera, orbit.current);
     }
   }, [camera, modelData]);
 
   return (
     <>
       <Environment
-        preset="sunset"
-        // files={dance}
+        // preset="sunset"
+        files={dance}
       />
       <OrbitControls ref={orbit} />
     </>

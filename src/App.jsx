@@ -23,7 +23,7 @@ function App() {
       <CanvasComponent>
         <ThreejsComponent modelData={modelData} />
         <Model setModelData={setModelData} />
-        {/* <Spring /> */}
+        <Spring />
         <EffectComposer>
           <Bloom
             luminanceThreshold={1}
