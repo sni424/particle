@@ -3,11 +3,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-import skybox_spring from '/skybox_spring.glb?url';
+import skybox_spring from '/skybox/skybox_spring.glb?url';
+import skybox_autumn from '/skybox/skybox_autumn.glb?url';
+import skybox_winter from '/skybox/skybox_winter.glb?url';
 
-import skybox_winter from '/skybox_winter.glb?url';
-
-const skyboxes = [skybox_spring, skybox_winter];
+const skyboxes = [skybox_spring, skybox_autumn, skybox_winter];
 
 const SkyBox = ({ step }) => {
     const { scene } = useThree();

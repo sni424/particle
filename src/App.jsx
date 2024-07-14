@@ -9,14 +9,18 @@ import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import SkyBox from './threejs/SkyBox';
 import Winter from './threejs/Winter';
 import Audio from './Audio';
+import Loading from './Loading';
+import Autum from './threejs/Autum';
 
 function App() {
     const [modelData, setModelData] = useState(null);
     const [step, setStep] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setStep((prevStep) => (prevStep >= 2 ? 1 : prevStep + 1));
+            setStep((prevStep) => (prevStep >= 3 ? 1 : prevStep + 1));
+            setIsLoading(true); // Step 변경 시 로딩 상태로 설정
         }, 8000);
 
         // 컴포넌트 언마운트 시 인터벌 클리어
@@ -30,11 +34,13 @@ function App() {
                 position: 'relative',
             }}
         >
+            {/* <Loading isLoading={isLoading} /> */}
             <CanvasComponent>
                 <ThreejsComponent modelData={modelData} />
-                <Model setModelData={setModelData} step={step} />
+                <Model setModelData={setModelData} step={step} onLoad={() => setIsLoading(false)} />
                 {step === 1 && <Spring />}
-                {step === 2 && <Winter />}
+                {step === 2 && <Autum />}
+                {step === 3 && <Winter />}
 
                 <EffectComposer>
                     <Bloom luminanceThreshold={1} luminanceSmoothing={0.1} intensity={0.5} />
