@@ -1,26 +1,32 @@
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"; // Corrected path
-import { useEffect, useRef } from "react";
-import { dfsFun } from "../../utils/utilfun";
-import * as THREE from "three";
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
-import cherry from "/scene (89).glb?url";
+import cherry from '/scene (89).glb?url';
+import tree from '/xmas_tree.glb?url';
 
-const Model = ({ setModelData }) => {
-  const gltf = useLoader(GLTFLoader, cherry);
-  const modelRef = useRef();
+const models = [cherry, tree];
 
-  useEffect(() => {
-    if (modelRef.current && gltf.scene) {
-      setModelData(gltf.scene);
-      //   const treeLeaf = dfsFun(gltf.scene.children, "Cylinder006");
-      //   treeLeaf.emissiveIntensity = 1;
-      //   treeLeaf.material.depthWrite = true;
-      //   treeBranch.material.depthWrite = true;
-    }
-  }, [gltf.scene]);
+const Model = ({ setModelData, step }) => {
+    const groupRef = useRef(new THREE.Group());
+    const currentModel = models[step - 1];
+    const model = useLoader(GLTFLoader, currentModel);
 
-  return <primitive ref={modelRef} object={gltf.scene} />;
+    useEffect(() => {
+        const group = groupRef.current;
+
+        // 그룹의 모든 자식 제거
+        group.clear();
+
+        if (model.scene) {
+            // 새 모델 추가
+            group.add(model.scene);
+            setModelData(model.scene);
+        }
+    }, [model, setModelData]);
+
+    return <primitive ref={groupRef} object={groupRef.current} />;
 };
 
 export default Model;
