@@ -4,10 +4,11 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 import cherry from '/model/scene (89).glb?url';
+import summer from '/model/summer.glb?url';
 import autum from '/model/autum.glb?url';
 import tree from '/model/xmas_tree.glb?url';
 
-const models = [cherry, autum, tree];
+const models = [cherry, summer, autum, tree];
 
 const Model = ({ setModelData, step, onLoad }) => {
     const groupRef = useRef(new THREE.Group());

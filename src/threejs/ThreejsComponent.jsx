@@ -17,7 +17,7 @@ const ThreejsComponent = ({ modelData }) => {
     return (
         <>
             <Environment preset="city" />
-            <OrbitControls ref={orbit} />
+            <OrbitControls ref={orbit} enablePan={false} />
         </>
     );
 };

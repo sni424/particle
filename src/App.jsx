@@ -11,21 +11,22 @@ import Winter from './threejs/Winter';
 import Audio from './Audio';
 import Loading from './Loading';
 import Autum from './threejs/Autum';
+import Summer from './threejs/Summer';
 
 function App() {
     const [modelData, setModelData] = useState(null);
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(2);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setStep((prevStep) => (prevStep >= 3 ? 1 : prevStep + 1));
-            setIsLoading(true); // Step 변경 시 로딩 상태로 설정
-        }, 8000);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setStep((prevStep) => (prevStep >= 4 ? 1 : prevStep + 1));
+    //         setIsLoading(true); // Step 변경 시 로딩 상태로 설정
+    //     }, 12000);
 
-        // 컴포넌트 언마운트 시 인터벌 클리어
-        return () => clearInterval(interval);
-    }, []);
+    //     // 컴포넌트 언마운트 시 인터벌 클리어
+    //     return () => clearInterval(interval);
+    // }, []);
     return (
         <div
             style={{
@@ -39,8 +40,9 @@ function App() {
                 <ThreejsComponent modelData={modelData} />
                 <Model setModelData={setModelData} step={step} onLoad={() => setIsLoading(false)} />
                 {step === 1 && <Spring />}
-                {step === 2 && <Autum />}
-                {step === 3 && <Winter />}
+                {step === 2 && <Summer />}
+                {step === 3 && <Autum />}
+                {step === 4 && <Winter />}
 
                 <EffectComposer>
                     <Bloom luminanceThreshold={1} luminanceSmoothing={0.1} intensity={0.5} />

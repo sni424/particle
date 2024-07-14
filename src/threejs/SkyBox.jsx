@@ -4,10 +4,11 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 import skybox_spring from '/skybox/skybox_spring.glb?url';
+import skybox_summer from '/skybox/skybox_summer.glb?url';
 import skybox_autumn from '/skybox/skybox_autumn.glb?url';
 import skybox_winter from '/skybox/skybox_winter.glb?url';
 
-const skyboxes = [skybox_spring, skybox_autumn, skybox_winter];
+const skyboxes = [skybox_spring, skybox_summer, skybox_autumn, skybox_winter];
 
 const SkyBox = ({ step }) => {
     const { scene } = useThree();

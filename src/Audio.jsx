@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import spring from '/audio/spring.wav?url';
+import summer from '/audio/summer.wav?url';
 import autum from '/audio/autum.wav?url';
 import winter from '/audio/winter.wav?url';
 
-const audioSource = [spring, autum, winter];
+const audioSource = [spring, summer, autum, winter];
 
 const Audio = ({ step }) => {
     const [isPlaying, setIsPlaying] = useState(false);
