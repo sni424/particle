@@ -15,18 +15,18 @@ import Summer from './threejs/Summer';
 
 function App() {
     const [modelData, setModelData] = useState(null);
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setStep((prevStep) => (prevStep >= 4 ? 1 : prevStep + 1));
-    //         setIsLoading(true); // Step 변경 시 로딩 상태로 설정
-    //     }, 12000);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setStep((prevStep) => (prevStep >= 4 ? 1 : prevStep + 1));
+            setIsLoading(true); // Step 변경 시 로딩 상태로 설정
+        }, 12000);
 
-    //     // 컴포넌트 언마운트 시 인터벌 클리어
-    //     return () => clearInterval(interval);
-    // }, []);
+        // 컴포넌트 언마운트 시 인터벌 클리어
+        return () => clearInterval(interval);
+    }, []);
     return (
         <div
             style={{
@@ -35,10 +35,15 @@ function App() {
                 position: 'relative',
             }}
         >
-            {/* <Loading isLoading={isLoading} /> */}
+            <Loading isLoading={isLoading} />
             <CanvasComponent>
                 <ThreejsComponent modelData={modelData} />
-                <Model setModelData={setModelData} step={step} onLoad={() => setIsLoading(false)} />
+                <Model
+                    isLoading={isLoading}
+                    setModelData={setModelData}
+                    step={step}
+                    onLoad={() => setIsLoading(false)}
+                />
                 {step === 1 && <Spring />}
                 {step === 2 && <Summer />}
                 {step === 3 && <Autum />}

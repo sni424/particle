@@ -19,7 +19,7 @@ const Loading = ({ isLoading }) => {
         <div className={`loader-overlay ${visible ? 'visible' : 'hidden'}`}>
             <div className="loader">
                 <div className="spinner"></div>
-                <p>Next Step...</p>
+                <p>Next Weather</p>
             </div>
         </div>
     );

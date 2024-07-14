@@ -10,7 +10,7 @@ import tree from '/model/xmas_tree.glb?url';
 
 const models = [cherry, summer, autum, tree];
 
-const Model = ({ setModelData, step, onLoad }) => {
+const Model = ({ isLoading, setModelData, step, onLoad }) => {
     const groupRef = useRef(new THREE.Group());
     const currentModel = models[step - 1];
     const model = useLoader(GLTFLoader, currentModel);
@@ -20,14 +20,13 @@ const Model = ({ setModelData, step, onLoad }) => {
 
         // 그룹의 모든 자식 제거
         group.clear();
-
-        if (model.scene) {
+        onLoad();
+        if (model.scene && !isLoading) {
             // 새 모델 추가
             group.add(model.scene);
             setModelData(model.scene);
-            onLoad(); // 모델 로드 완료 시 호출
         }
-    }, [model, onLoad]);
+    }, [model, onLoad, isLoading]);
 
     return <primitive ref={groupRef} object={groupRef.current} />;
 };
