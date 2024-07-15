@@ -8,7 +8,7 @@ import winter from '/audio/winter.wav?url';
 const audioSource = [spring, summer, autum, winter];
 
 const Audio = ({ step }) => {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
 
     useEffect(() => {
         const audioElement = document.getElementById('audio-element');
@@ -28,7 +28,7 @@ const Audio = ({ step }) => {
 
     return (
         <>
-            <audio id="audio-element" loop />
+            <audio id="audio-element" loop autoPlay />
             <button className="audio-toggle-button" onClick={toggleAudio}>
                 {isPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
             </button>
