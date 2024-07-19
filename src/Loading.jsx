@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-const Loading = ({ isLoading }) => {
-    const [visible, setVisible] = useState(isLoading);
+const Loading = ({ allModelsLoaded }) => {
+  const [visible, setVisible] = useState(true);
 
-    useEffect(() => {
-        if (isLoading) {
-            setVisible(true);
-        } else {
-            const timer = setTimeout(() => {
-                setVisible(false);
-            }, 1000);
+  useEffect(() => {
+    if (allModelsLoaded) {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+  }, [allModelsLoaded]);
 
-            return () => clearTimeout(timer);
-        }
-    }, [isLoading]);
-
-    return (
-        <div className={`loader-overlay ${visible ? 'visible' : 'hidden'}`}>
-            <div className="loader">
-                <div className="spinner"></div>
-                <p>Next Weather</p>
+  return (
+    <>
+      {visible && (
+        <div className="loader-overlay">
+          <div className="loader">
+            <div className="center">
+              <div className="spinner"></div>
             </div>
+            <p>Next Weather</p>
+          </div>
         </div>
-    );
+      )}
+    </>
+  );
 };
 
 export default Loading;
